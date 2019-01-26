@@ -1,0 +1,18 @@
+{
+	"code":0,
+	"msg":"成功",
+	"count":1,
+	"data":[
+		{
+			"id":1,
+			"username":"张三",
+			"sex":"男",
+			"city":"杭州市",
+			"sign":"我曾相信这个世界遍布光明,可我眼中却只看到了黑暗！",
+			"experience":100,
+			"score":5,
+			"classify":"程序员",
+			"wealth":25614
+		}
+	]
+}
