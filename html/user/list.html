@@ -142,6 +142,17 @@ layui.use('table', function(){
     if(obj.event === 'del'){
       layer.confirm('确认删除此数据?', function(index){
       	var url = "/";
+      	var where = {"id":data.id};
+      	$.get(url,where,function(d){
+      		if(d.code==200){
+      			layer.msg("操作成功!");
+      			setTimeout(function(){
+      				window.location.reload();
+      			},500);
+      		}else{
+      			layer.msg("操作失败!");
+      		}
+      	});
         obj.del();
         layer.close(index);
       });
