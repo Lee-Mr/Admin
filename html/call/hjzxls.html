@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>呼叫中心流水</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="stylesheet" href="../../layui/css/layui.css"  media="all">
+  <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
+</head>
+<body>
+ 
+<table class="layui-hide" id="test" lay-filter="test"></table>
+ 
+<script type="text/html" id="toolbarDemo">
+  <div class="layui-btn-group">
+	  <button class="layui-btn layui-btn-primary layui-btn-sm" lay-event="add">
+	    <i class="layui-icon">&#xe654;</i>新增
+	  </button>
+</div>
+</script>
+              
+          
+<script src="../../layui/layui.js" charset="utf-8"></script>
+<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 --> 
+ 
+<script>
+layui.use('table', function(){
+  var table = layui.table;
+  
+  table.render({
+    elem: '#test'
+    ,url:'../../json/hjzxls.json'
+    ,toolbar: '#toolbarDemo'
+    ,title: '呼叫中心流水'
+    ,cols: [[
+      ,{field:'phone1', title:'主叫号码', width:120}
+      ,{field:'phone2', title:'中继号码', width:120}
+      ,{field:'phone3', title:'被叫号码', width:120}
+      ,{field:'type', title:'呼叫类型', width:120}
+      ,{field:'status', title:'状态', width:120}
+      ,{field:'send_time', title:'通话发起时间', width:120}
+      ,{field:'start_time', title:'通话开始时间', width:120}
+      ,{field:'end_time', title:'通话结束时间', width:120}
+      ,{field:'hour', title:'呼叫总时长', width:120}
+      ,{field:'dengdai', title:'等待接通时长', width:120}
+      ,{field:'call_time', title:'通话时长', width:120}
+      ,{field:'mp3', title:'录音文件', width:120}
+      ,{field:'weijie', title:'未接电话处理状态', width:120}
+      ,{field:'wjw', title:'未接外呼流水', width:120}
+      ,{field:'call_status', title:'话单状态', width:120}
+    ]]
+    ,page: true
+  });
+  
+  //头工具栏事件
+  table.on('toolbar(test)', function(obj){
+    var checkStatus = table.checkStatus(obj.config.id);
+    switch(obj.event){
+      case 'add':
+        layer.open({
+        	type:2,
+        	title:"新增呼叫中心流水",
+        	area:["90%","80%"],
+        	content:"hjzxls_add.html"
+        });
+      break;
+    };
+  });
+  
+  //监听行工具事件
+  table.on('tool(test)', function(obj){
+    var data = obj.data;
+    //console.log(obj)
+    if(obj.event === 'del'){
+      layer.confirm('真的删除行么', function(index){
+        obj.del();
+        layer.close(index);
+      });
+    } else if(obj.event === 'edit'){
+      layer.prompt({
+        formType: 2
+        ,value: data.email
+      }, function(value, index){
+        obj.update({
+          email: value
+        });
+        layer.close(index);
+      });
+    }
+  });
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>新增呼叫中心流水</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="stylesheet" href="../../layui/css/layui.css"  media="all">
+  <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
+</head>
+<body>
+              
+<fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+  <legend>巾帼西丽文新街道·呼叫中心流水</legend>
+</fieldset>
+ 
+<form class="layui-form" action=""> 
+  <div class="layui-form-item">
+    <div class="layui-inline">
+      <label class="layui-form-label">主叫号码</label>
+      <div class="layui-input-inline">
+        <input type="tel" name="phone1" lay-verify="required|phone" autocomplete="off" class="layui-input" placeholder="主叫号码">
+      </div>
+    </div>
+    <div class="layui-inline">
+      <label class="layui-form-label">中继号码</label>
+      <div class="layui-input-inline">
+        <input type="tel" name="phone2" autocomplete="off" class="layui-input" placeholder="真实被叫">
+      </div>
+    </div>
+    <div class="layui-inline">
+      <label class="layui-form-label">被叫号码</label>
+      <div class="layui-input-inline">
+        <input type="tel" name="phone3" lay-verify="required|phone" autocomplete="off" class="layui-input" placeholder="被叫号码">
+      </div>
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">呼叫类型</label>
+    <div class="layui-input-block">
+      <input type="radio" name="call_type" value="呼入" title="呼入">
+      <input type="radio" name="call_type" value="呼出" title="呼出">
+    </div>
+  </div>
+  
+   <div class="layui-form-item">
+    <label class="layui-form-label">状态</label>
+    <div class="layui-input-block">
+      <input type="radio" name="call_type" value="未接通" title="未接通">
+      <input type="radio" name="call_type" value="已接通" title="已接通">
+    </div>
+  </div>
+  
+  <div class="layui-form-item">
+    <div class="layui-inline">
+      <label class="layui-form-label">发起时间</label>
+      <div class="layui-input-inline">
+        <input type="text" name="date" id="date1" lay-verify="date" placeholder="年:月:日 时:分:秒" autocomplete="off" class="layui-input">
+      </div>
+    </div>
+    <div class="layui-inline">
+      <label class="layui-form-label">开始时间</label>
+      <div class="layui-input-inline">
+        <input type="text" name="date" id="date2" lay-verify="date" placeholder="年:月:日 时:分:秒" autocomplete="off" class="layui-input">
+      </div>
+    </div>
+    <div class="layui-inline">
+      <label class="layui-form-label">结束时间</label>
+      <div class="layui-input-inline">
+        <input type="text" name="date" id="date3" lay-verify="date" placeholder="年:月:日 时:分:秒" autocomplete="off" class="layui-input">
+      </div>
+    </div>
+  </div>
+  
+  <div class="layui-form-item">
+    <div class="layui-inline">
+      <label class="layui-form-label">呼叫总时长</label>
+      <div class="layui-input-inline" style="width: 100px;">
+        <input type="text" name="price_min" value="0" placeholder="呼叫总时长" autocomplete="off" class="layui-input">
+      </div>
+      <div class="layui-form-mid">秒</div>
+    </div>
+    <div class="layui-inline">
+      <label class="layui-form-label">等待时长</label>
+      <div class="layui-input-inline" style="width: 100px;">
+        <input type="text" name="price_min" value="0" placeholder="等待接通时长" autocomplete="off" class="layui-input">
+      </div>
+      <div class="layui-form-mid">秒</div>
+    </div>
+    <div class="layui-inline">
+      <label class="layui-form-label">通话时长</label>
+      <div class="layui-input-inline" style="width: 100px;">
+        <input type="text" name="price_min" value="0" placeholder="通话时长" autocomplete="off" class="layui-input">
+      </div>
+      <div class="layui-form-mid">秒</div>
+    </div>
+  </div>
+   <div class="layui-form-item">
+    <label class="layui-form-label">录音文件</label>
+    <div class="layui-input-block">
+      <input type="file" id="files" name="files" lay-verify="files" accept="audio/x-mpeg">
+    </div>
+  </div>
+   <div class="layui-form-item">
+    <label class="layui-form-label">未接电话处理状态</label>
+    <div class="layui-input-block">
+      <input type="radio" name="call_type" value="已处理" title="已处理">
+      <input type="radio" name="call_type" value="未处理" title="未处理">
+    </div>
+  </div>
+    <div class="layui-form-item">
+    <label class="layui-form-label">未接外呼流水</label>
+    <div class="layui-input-block">
+      <button type="button" class="layui-btn layui-btn-primary layui-btn-sm">添加关联</button>
+    </div>
+  </div>
+   <div class="layui-form-item">
+    <label class="layui-form-label">话单状态</label>
+    <div class="layui-input-block">
+      <input type="radio" name="call_type" value="接通中" title="接通中">
+      <input type="radio" name="call_type" value="总机话单合并" title="总机话单合并">
+      <input type="radio" name="call_type" value="分机话单合并" title="分机话单合并">
+      <input type="radio" name="call_type" value="话单合并完成" title="话单合并完成">
+    </div>
+  </div>
+  
+  <div class="layui-form-item">
+    <div class="layui-input-block">
+      <button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+      <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+    </div>
+  </div>
+</form>
+          
+<script src="../../layui/layui.js" charset="utf-8"></script>
+<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+<script>
+layui.use(['form', 'layedit', 'laydate'], function(){
+  var form = layui.form
+  ,layer = layui.layer
+  ,laydate = layui.laydate;
+  
+  //日期
+  laydate.render({
+    elem: '#date1',
+    type: 'datetime'
+  });
+  laydate.render({
+    elem: '#date2'
+  });
+ 
+  //自定义验证规则
+  form.verify({
+    title: function(value){
+      if(value.length < 5){
+        return '标题至少得5个字符啊';
+      }
+    }
+    ,pass: [
+      /^[\S]{6,12}$/
+      ,'密码必须6到12位，且不能出现空格'
+    ]
+    ,content: function(value){
+      layedit.sync(editIndex);
+    }
+  });
+ 
+  
+  //监听提交
+  form.on('submit(demo1)', function(data){
+    layer.alert(JSON.stringify(data.field), {
+      title: '最终的提交信息'
+    })
+    return false;
+  });
+ 
+  
+  
+});
+</script>
+
+</body>
+</html>

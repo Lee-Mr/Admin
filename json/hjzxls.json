@@ -1,0 +1,8 @@
+{
+	"code":0,
+	"msg":"暂无数据",
+	"count":1,
+	"data":[
+		{"phone1":18423664425,"phone2":13567157844,"phone3":13567157844,"type":"正常","status":"接通","send_time":"16:00","start_time":"16:01","end_time":"16:05","hour":0.1,"dengdai":0.1,"call_time":0.01,"mp3":"录音.mp3","weijie":"已处理","wjw":"未处理","call_status":"确认"}
+	]
+}
