@@ -36,7 +36,8 @@ layui.use('table', function(){
     ,title: '用户数据表'
     ,totalRow: true
     ,cols: [[
-      {field:'username', title:'姓名', width:120, totalRowText: '合计'}
+    	{type: 'checkbox', fixed: 'left'}
+      ,{field:'username', title:'姓名', width:120, totalRowText: '合计' , fixed: 'left'}
       ,{field:'image', title:'一寸照片', width:120, edit: 'text', templet: function(res){
         return '<img src="'+ res.image +'" width="30px" height="30px" />'
       }}
