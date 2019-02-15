@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>注销服务的长者</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="stylesheet" href="../../layui/css/layui.css"  media="all">
+  <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
+</head>
+<body>
+ 
+<table class="layui-hide" id="test" lay-filter="test"></table>
+ 
+<script type="text/html" id="toolbarDemo">
+  <div class="layui-btn-group">
+	  <button class="layui-btn layui-btn-primary layui-btn-sm" lay-event="add">
+	    <i class="layui-icon">&#xe654;</i>新增
+	  </button>
+</div>
+</script>
+ 
+<script type="text/html" id="barDemo">
+  <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+  <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+              
+          
+<script src="../../layui/layui.js" charset="utf-8"></script>
+<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 --> 
+ 
+<script>
+layui.use('table', function(){
+  var table = layui.table;
+  
+  table.render({
+    elem: '#test'
+    ,url:'../../json/zhangzhedangan.json'
+    ,toolbar: '#toolbarDemo'
+    ,title: '长者档案表'
+    ,cols: [[
+      {type: 'checkbox', fixed: 'left'}
+      ,{field:'username', title:'姓名', width:120, fixed: 'left'}
+      ,{field:'sex', title:'性别', width:120}
+      ,{field:'phone', title:'联系电话', width:120}
+      ,{field:'sq', title:'社区', width:120, templet:function(d){
+      		return '<span class="layui-badge layui-bg-blue">'+d.sq+'</span>';
+      }}
+      ,{field:'address', title:'居住地址', width:120}
+      ,{field:'idcard', title:'身份证', width:120, templet:function(d){
+      		return '<span class="layui-badge layui-bg-blue">'+d.idcard+'</span>';
+      }}
+      ,{field:'hly', title:'护理员', width:120}
+      ,{field:'sysc', title:'剩余时长', width:120}
+      ,{field:'yfwsc', title:'已服务时长', width:120}
+      ,{field:'fwyf', title:'服务月份', width:120}
+      ,{field:'jhsc', title:'计划时长', width:120}
+      ,{field:'jzsc', title:'结转时长', width:120}
+      ,{field:'zfsc', title:'自费时长', width:120}
+      ,{field:'zzzt', title:'长者状态', width:120}
+      ,{field:'zxsj', title:'注销时间', width:120}
+      ,{field:'zxyy', title:'注销原因', width:120}
+      ,{field:'age', title:'年龄', width:120}
+      ,{field:'birthday', title:'出生年月', width:120}
+      ,{field:'image', title:'照片', width:120, templet:function(d){
+      		return '<img src="'+d.image+'" width="30px" height="30px" />';
+      }}
+      ,{field:'xl', title:'学历', width:120}
+      ,{field:'bs', title:'病史', width:120}
+      ,{field:'habby', title:'兴趣爱好', width:120}
+      ,{field:'sb', title:'社保', width:120}
+      ,{field:'tc', title:'特长', width:120}
+      ,{field:'jtqk', title:'家庭情况', width:120}
+      ,{field:'lxr', title:'联系人', width:120}
+      ,{field:'yzzgx', title:'与长者关系', width:120}
+      ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:150}
+    ]]
+    ,page: true
+  });
+  
+  //头工具栏事件
+  table.on('toolbar(test)', function(obj){
+    var checkStatus = table.checkStatus(obj.config.id);
+    switch(obj.event){
+      case 'getCheckData':
+        var data = checkStatus.data;
+        layer.alert(JSON.stringify(data));
+      break;
+      case 'getCheckLength':
+        var data = checkStatus.data;
+        layer.msg('选中了：'+ data.length + ' 个');
+      break;
+      case 'isAll':
+        layer.msg(checkStatus.isAll ? '全选': '未全选');
+      break;
+    };
+  });
+  
+  //监听行工具事件
+  table.on('tool(test)', function(obj){
+    var data = obj.data;
+    //console.log(obj)
+    if(obj.event === 'del'){
+      layer.confirm('真的删除行么', function(index){
+        obj.del();
+        layer.close(index);
+      });
+    } else if(obj.event === 'edit'){
+      layer.prompt({
+        formType: 2
+        ,value: data.email
+      }, function(value, index){
+        obj.update({
+          email: value
+        });
+        layer.close(index);
+      });
+    }
+  });
+});
+</script>
+
+</body>
+</html>
