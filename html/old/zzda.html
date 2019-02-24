@@ -10,7 +10,15 @@
   <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
 </head>
 <body>
- 
+	<br />
+ <div class="demoTable">
+ 	&nbsp;
+  <div class="layui-inline">
+  <input class="layui-input" name="id" id="demoReload" placeholder="关键字" autocomplete="off">
+  </div>
+  <button class="layui-btn" data-type="reload">搜索</button>
+</div>
+
 <table class="layui-hide" id="test" lay-filter="test"></table>
  
 <script type="text/html" id="toolbarDemo">
@@ -87,9 +95,13 @@ layui.use('table', function(){
   table.on('toolbar(test)', function(obj){
     var checkStatus = table.checkStatus(obj.config.id);
     switch(obj.event){
-      case 'getCheckData':
-        var data = checkStatus.data;
-        layer.alert(JSON.stringify(data));
+      case 'add':
+        layer.open({
+        	type:2,
+        	title:"新建长者档案",
+        	area:["80%","80%"],
+        	content:"zzda_add.html"
+        });
       break;
       case 'getCheckLength':
         var data = checkStatus.data;
@@ -111,15 +123,12 @@ layui.use('table', function(){
         layer.close(index);
       });
     } else if(obj.event === 'edit'){
-      layer.prompt({
-        formType: 2
-        ,value: data.email
-      }, function(value, index){
-        obj.update({
-          email: value
-        });
-        layer.close(index);
-      });
+      layer.open({
+      	type:2,
+      	title:"编辑长者档案",
+      	area:["80%","80%"],
+      	content:"zzda_upd.html"
+      })
     }
   });
 });
