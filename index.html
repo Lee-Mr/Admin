@@ -58,15 +58,22 @@ layui.use(['form'], function(){
   form.on('submit(demo1)', function(data){
   	var field = data.field;
     var url = "http://47.107.67.96:8080/yyp_callcenter_api/v1/callcenter/setomaddress";
-    var value = {"address":field.ip};
+    
+    var FormData = new FormData();
+    FormData.append("address",field.ip);
+    
     $.ajax({
-    	url:url,
-    	type:"POST",
-    	//dataType:"jsonp",
-    	data:value,
-    	success:function(d){
-    		console.log(d);
-    	}
+    	type:"post",
+    	url:"http://47.107.67.96:8080/yyp_callcenter_api/v1/callcenter/setomaddress",
+    	data:FormData,
+    	dataType: 'JSON',
+    	async:true,
+    	cache: false, 
+	    processData: false, 
+	    contentType: false, 
+	    success:function (data) {  
+	        console.log(data);
+	    }
     });
     
     return false;
